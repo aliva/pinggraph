@@ -1,22 +1,13 @@
 package main
 
-import (
-	"fmt"
-	"time"
-)
-
 var hosts = make([]Host, 0)
 
-func pinger(h *Host) {
-	counter :=0
-	for {
+func pinger() {
+	for _, h := range hosts {
 		for _, r := range hosts {
 			if r.Name != h.Name {
-				counter ++
-				ping := h.Ping(r.Host)
-				fmt.Printf("%s => %s, %d, %f\n", h.Name, r.Name, counter , ping)
+				go h.Ping(r)
 			}
-			time.Sleep(1)
 		}
 	}
 }
@@ -24,8 +15,6 @@ func pinger(h *Host) {
 func main() {
 	done := make(chan bool)
 	hosts = LoadConfig("hosts.yml")
-	for _, h := range hosts {
-		go pinger(&h)
-	}
+	pinger()
 	<-done
 }

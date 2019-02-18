@@ -13,10 +13,17 @@ func LoadConfig(path string) []Host {
 	if err != nil {
 		log.Printf("yamlFile.Get err   #%v ", err)
 	}
-	c := make([]Host, 0)
-	err = yaml.Unmarshal(yamlFile, &c)
+	config := make([]Host, 0)
+	err = yaml.Unmarshal(yamlFile, &config)
 	if err != nil {
 		log.Fatalf("Unmarshal: %v", err)
 	}
-	return c
+
+	for i := range config {
+		if config[i].Port == 0 {
+			config[i].Port = 22
+		}
+	}
+
+	return config
 }
