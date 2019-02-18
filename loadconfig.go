@@ -23,6 +23,9 @@ func LoadConfig(path string) []Host {
 		if config[i].Port == 0 {
 			config[i].Port = 22
 		}
+		if config[i].User == "" {
+			config[i].User = "root"
+		}
 	}
 
 	return config
