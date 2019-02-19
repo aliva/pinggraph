@@ -37,7 +37,7 @@ func (host Host) Ping(remote Host) {
 		}
 		outputBytes, err := session.CombinedOutput(cmd)
 		if err != nil {
-			fmt.Println(err)
+			fmt.Println("Err", err)
 			return
 
 		}
