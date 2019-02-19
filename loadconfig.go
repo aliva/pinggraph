@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"log"
 
@@ -30,6 +31,7 @@ func LoadConfig(path string) []Host {
 			config[i].Name = config[i].Host
 		}
 	}
+	fmt.Println(config)
 
 	return config
 }
