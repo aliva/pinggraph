@@ -26,6 +26,9 @@ func LoadConfig(path string) []Host {
 		if config[i].User == "" {
 			config[i].User = "root"
 		}
+		if config[i].Name == "" {
+			config[i].Name = config[i].Host
+		}
 	}
 
 	return config
