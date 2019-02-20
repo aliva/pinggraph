@@ -13,7 +13,7 @@ window.onload = function () {
             console.log("Connection closed");
         };
         conn.onmessage = function (evt) {
-            var message = evt.data.split('\n');
+            var message = evt.data;
             console.log(message)
         };
     } else {

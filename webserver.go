@@ -3,7 +3,6 @@ package main
 import (
 	"log"
 	"net/http"
-	"time"
 
 	"github.com/gorilla/websocket"
 )
@@ -24,22 +23,16 @@ func serveHome(w http.ResponseWriter, r *http.Request) {
 }
 
 func serveWs(w http.ResponseWriter, r *http.Request) {
-	ws, err := upgrader.Upgrade(w, r, nil)
+	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		if _, ok := err.(websocket.HandshakeError); !ok {
 			log.Println(err)
 		}
 		return
 	}
-	go func(ws *websocket.Conn) {
-		defer ws.Close()
 
-		for {
-			data := map[string]string{
-				"key": "value",
-			}
-			ws.WriteJSON(data)
-			time.Sleep(time.Second)
-		}
-	}(ws)
+	webClients = append(
+		webClients,
+		webClient{conn: conn},
+	)
 }

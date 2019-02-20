@@ -21,6 +21,7 @@ func main() {
 	hosts = LoadConfig("hosts.yml")
 	// pinger()
 
+	go webClientHandler()
 	http.HandleFunc("/", serveHome)
 	http.HandleFunc("/ws", serveWs)
 	err := http.ListenAndServe(":8000", nil)
