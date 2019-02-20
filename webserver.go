@@ -35,7 +35,10 @@ func serveWs(w http.ResponseWriter, r *http.Request) {
 		defer ws.Close()
 
 		for {
-			ws.WriteMessage(websocket.TextMessage, []byte("Hello"))
+			data := map[string]string{
+				"key": "value",
+			}
+			ws.WriteJSON(data)
 			time.Sleep(time.Second)
 		}
 	}(ws)
