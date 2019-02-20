@@ -14,6 +14,8 @@ import (
 
 // Ping docs
 func (host Host) Ping(remote Host) {
+	var success, counter int
+
 	sshConfig := &ssh.ClientConfig{
 		User: host.User,
 		Auth: []ssh.AuthMethod{
@@ -30,15 +32,17 @@ func (host Host) Ping(remote Host) {
 	cmd := fmt.Sprintf("ping -c 1 %s -W 1 | tail -1 | awk '{print $4}' | cut -d '/' -f 2", remote.Host)
 
 	for {
+		counter++
+
 		session, err := client.NewSession()
 		if err != nil {
 			fmt.Println("session", err)
-			return
+			continue
 		}
 		outputBytes, err := session.CombinedOutput(cmd)
 		if err != nil {
 			fmt.Println("Err", err)
-			return
+			continue
 
 		}
 		output := string(outputBytes)
@@ -46,10 +50,11 @@ func (host Host) Ping(remote Host) {
 		f, err := strconv.ParseFloat(output, 64)
 
 		if err != nil {
-			fmt.Println(output)
-			return
+			fmt.Println("Err", output)
+			continue
 		}
-		fmt.Printf("%s => %s, %f\n", host.Name, remote.Name, f)
+		success++
+		fmt.Printf("%s => %s, %f - %d/%d\n", host.Name, remote.Name, f, success, counter)
 		time.Sleep(time.Second)
 	}
 }
