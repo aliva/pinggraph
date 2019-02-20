@@ -3,7 +3,7 @@ package main
 // Host docs
 type Host struct {
 	Name     string
-	Host     string
+	IP       string
 	Port     int
 	User     string
 	IsRemote bool

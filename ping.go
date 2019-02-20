@@ -23,13 +23,16 @@ func (host Host) Ping(remote Host) {
 		},
 		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
 	}
-	client, err := ssh.Dial("tcp", fmt.Sprintf("%s:%d", host.Host, host.Port), sshConfig)
+	client, err := ssh.Dial("tcp", fmt.Sprintf("%s:%d", host.IP, host.Port), sshConfig)
 	if err != nil {
 		fmt.Println("client", err)
 		return
 	}
 
-	cmd := fmt.Sprintf("ping -c 1 %s -W 1 | tail -1 | awk '{print $4}' | cut -d '/' -f 2", remote.Host)
+	cmd := fmt.Sprintf(
+		"ping -c 1 %s -W 1 | tail -1 | awk '{print $4}' | cut -d '/' -f 2",
+		remote.IP,
+	)
 
 	for {
 		counter++
