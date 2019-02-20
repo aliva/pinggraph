@@ -8,10 +8,10 @@ import (
 )
 
 type pingResult struct {
-	HostIP   string
-	RemoteIP string
-	ID       int
-	Result   float64
+	HostName   string
+	RemoteName string
+	Counter    int
+	Result     float64
 }
 
 type webClient struct {
