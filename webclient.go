@@ -7,23 +7,31 @@ import (
 	"github.com/gorilla/websocket"
 )
 
+type pingResult struct {
+	HostIP   string
+	RemoteIP string
+	ID       int
+	Result   float64
+}
+
 type webClient struct {
 	conn *websocket.Conn
 }
 
-var webClients = make([]webClient, 0)
+var webClientSlice = make([]webClient, 0)
+var pingResultChan = make(chan pingResult)
 
 func webClientHandler() {
 	for {
-		for i, client := range webClients {
-			data := map[string]string{
-				"key": time.Now().String(),
-			}
-			err := client.conn.WriteJSON(data)
+		result := <-pingResultChan
+		fmt.Println(result)
+
+		for i, client := range webClientSlice {
+			err := client.conn.WriteJSON(result)
 			if err != nil {
 				fmt.Println("Connection closed")
 				client.conn.Close()
-				webClients = append(webClients[:i], webClients[i+1:]...)
+				webClientSlice = append(webClientSlice[:i], webClientSlice[i+1:]...)
 			}
 		}
 		time.Sleep(time.Second)

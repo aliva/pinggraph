@@ -31,8 +31,8 @@ func serveWs(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	webClients = append(
-		webClients,
+	webClientSlice = append(
+		webClientSlice,
 		webClient{conn: conn},
 	)
 }

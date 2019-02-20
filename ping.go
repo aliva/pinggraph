@@ -37,14 +37,23 @@ func (host Host) Ping(remote Host) {
 	for {
 		counter++
 
+		resultItem := pingResult{
+			HostIP:   host.IP,
+			RemoteIP: remote.IP,
+			ID:       counter,
+			Result:   -1,
+		}
+
 		session, err := client.NewSession()
 		if err != nil {
 			fmt.Println("session", err)
+			pingResultChan <- resultItem
 			continue
 		}
 		outputBytes, err := session.CombinedOutput(cmd)
 		if err != nil {
 			fmt.Println("Err", err)
+			pingResultChan <- resultItem
 			continue
 
 		}
@@ -54,10 +63,14 @@ func (host Host) Ping(remote Host) {
 
 		if err != nil {
 			fmt.Println("Err", output)
+			pingResultChan <- resultItem
 			continue
 		}
 		success++
 		fmt.Printf("%s => %s, %f - %d/%d\n", host.Name, remote.Name, f, success, counter)
+		resultItem.Result = f
+		pingResultChan <- resultItem
+
 		time.Sleep(time.Second)
 	}
 }

@@ -19,7 +19,7 @@ func pinger() {
 
 func main() {
 	hosts = LoadConfig("hosts.yml")
-	// pinger()
+	pinger()
 
 	go webClientHandler()
 	http.HandleFunc("/", serveHome)
