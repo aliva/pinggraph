@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script type="text/javascript">
+window.onload = function () {
+    var conn;
+    var msg = document.getElementById("msg");
+    var log = document.getElementById("log");
+
+    if (window["WebSocket"]) {
+        conn = new WebSocket("ws://" + document.location.host + "/ws");
+        conn.onclose = function (evt) {
+            console.log("Connection closed");
+        };
+        conn.onmessage = function (evt) {
+            var message = evt.data.split('\n');
+            console.log(message)
+        };
+    } else {
+        console.log("Your browser does not support WebSockets.");
+    }
+};
+</script>
+</head>
+<body>
+</body>
+</html>

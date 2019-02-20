@@ -1,5 +1,10 @@
 package main
 
+import (
+	"log"
+	"net/http"
+)
+
 var hosts = make([]Host, 0)
 
 func pinger() {
@@ -13,8 +18,13 @@ func pinger() {
 }
 
 func main() {
-	done := make(chan bool)
 	hosts = LoadConfig("hosts.yml")
-	pinger()
-	<-done
+	// pinger()
+
+	http.HandleFunc("/", serveHome)
+	http.HandleFunc("/ws", serveWs)
+	err := http.ListenAndServe(":8000", nil)
+	if err != nil {
+		log.Fatal("ListenAndServe: ", err)
+	}
 }
