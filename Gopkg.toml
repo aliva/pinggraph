@@ -1,0 +1,15 @@
+[[constraint]]
+  name = "github.com/gorilla/websocket"
+  version = "1.4.0"
+
+[[constraint]]
+  branch = "master"
+  name = "golang.org/x/crypto"
+
+[[constraint]]
+  name = "gopkg.in/yaml.v2"
+  version = "2.2.2"
+
+[prune]
+  go-tests = true
+  unused-packages = true
