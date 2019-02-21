@@ -37,7 +37,7 @@ function addEdge(data){
       "source": data.HostName,
       "target": data.RemoteName,
       "type": "curvedArrow",
-    //   "label": data.Result,
+      "label": data.Result + "ms",
     })
     s.refresh()
 }
@@ -85,6 +85,7 @@ s = new sigma({
         type: 'canvas'
     },
     settings: {
+        defaultEdgeLabelSize:20,
         edgeLabelSize: 'proportional'
     }
 });
