@@ -8,6 +8,7 @@
 <script type="text/javascript">
 var data = {}
 var nodes = []
+var edges = []
 
 function addNode(name){
     if (nodes.includes(name)){
@@ -29,6 +30,13 @@ function addNode(name){
 
 function addEdge(data){
     let id = data.HostName + "-" + data.RemoteName;
+    if (edges.includes(id) == false) {
+        id = data.RemoteName + "-" + data.HostName;
+    }
+    if (edges.includes(id) == false) {
+        edges.push(id)
+    }
+
     if (s.graph.edges(id)){
         s.graph.dropEdge(id)
     }
@@ -37,7 +45,7 @@ function addEdge(data){
       "size": 100,
       "source": data.HostName,
       "target": data.RemoteName,
-      "type": "curvedArrow",
+    //   "type": "curvedArrow",
       "label": data.Result + "ms",
     })
     s.refresh()
