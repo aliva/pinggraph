@@ -4,6 +4,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sigma.js/1.2.1/sigma.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sigma.js/1.2.1/plugins/sigma.renderers.parallelEdges.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sigma.js/1.2.1/plugins/sigma.renderers.edgeLabels.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sigma.js/1.2.1/plugins/sigma.plugins.dragNodes.min.js"></script>
 <script type="text/javascript">
 var data = {}
 var nodes = []
@@ -89,5 +90,6 @@ s = new sigma({
         edgeLabelSize: 'proportional'
     }
 });
+var dragListener = sigma.plugins.dragNodes(s, s.renderers[0]);
 </script>
 </html>
