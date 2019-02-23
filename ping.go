@@ -65,7 +65,7 @@ func (host Host) Ping(remote Host) {
 			continue
 		}
 		success++
-		fmt.Printf("%s => %s, %f - %d/%d\n", host.Name, remote.Name, f, success, counter)
+		fmt.Printf("%s => %s, %f - %d/%d\n", host.Name, remote.Name, f, success, resultItem.Counter)
 		resultItem.Result = f
 
 		time.Sleep(time.Second)
