@@ -9,8 +9,8 @@
     src="https://cdnjs.cloudflare.com/ajax/libs/sigma.js/1.2.1/plugins/sigma.renderers.edgeLabels.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sigma.js/1.2.1/plugins/sigma.plugins.dragNodes.min.js"></script>
   <script type="text/javascript">
-    var data = {}
     var nodes = []
+    var edgesData = {}
     var edges = []
 
     function addNode(name) {
@@ -32,8 +32,19 @@
 
     function addEdge(data) {
       let id = data.HostName + "-" + data.RemoteName;
+      let revId = data.RemoteName + "-" + data.HostName;
+      edgesData[id] = {
+        "success": data.Success,
+        "counter": data.Counter,
+      }
+      let success = edgesData[id].success
+      let counter = edgesData[id].counter
+      if (revId in edgesData) {
+        success += edgesData[revId].success
+        counter += edgesData[revId].counter
+      }
       if (edges.includes(id) == false) {
-        id = data.RemoteName + "-" + data.HostName;
+        id = revId;
       }
       if (edges.includes(id) == false) {
         edges.push(id)
@@ -48,7 +59,7 @@
         "source": data.HostName,
         "target": data.RemoteName,
         // "type": "curvedArrow",
-        "label": data.Result + "ms (" + data.Success + "/" +  data.Counter + ")",
+        "label": data.Result + "ms (" + success + "/" + counter + ")",
       })
       s.refresh()
     }
