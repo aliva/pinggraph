@@ -11,7 +11,7 @@ Note that you can also add external nodes, (for example you want to ping `8.8.8.
 pinggraph -f hosts.yml
 ```
 
-hosts.yml keys:
+### hosts.yml keys
 
 (check `hosts.yml.example` for sample)
 
@@ -21,5 +21,3 @@ hosts.yml keys:
 | user     | `root`         | User used for ssh connection into node
 | name     | if empty uses host value | Name given to this node |
 | isremote | false        | pinggraph doesn't ssh connect into remote nodes, but other nodes will ping it, (when you want to check if all nodes can connect into an external server like `8.8.8.8`)
-
-## How does it work?
