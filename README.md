@@ -8,7 +8,11 @@ Note that you can also add external nodes, (for example you want to ping `8.8.8.
 
 
 ```
+# Using pre-built file
 pinggraph -f hosts.yml
+
+# From source
+go run *.go -f hosts.yml
 ```
 
 ### hosts.yml keys
