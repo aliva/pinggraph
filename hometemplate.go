@@ -1,3 +1,6 @@
+package main
+
+var homeTemplate = `
 <!DOCTYPE html>
 <html lang="en">
 
@@ -117,3 +120,4 @@
 </script>
 
 </html>
+`

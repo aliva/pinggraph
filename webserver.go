@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -19,7 +20,7 @@ func serveHome(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
-	http.ServeFile(w, r, "home.html")
+	fmt.Fprintf(w, homeTemplate)
 }
 
 func serveWs(w http.ResponseWriter, r *http.Request) {

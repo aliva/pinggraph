@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 	"net/http"
 )
@@ -23,6 +24,8 @@ func main() {
 	}
 
 	go webClientHandler()
+
+	fmt.Println("Open http://127.0.0.1:8000 in browser")
 
 	http.HandleFunc("/", serveHome)
 	http.HandleFunc("/ws", serveWs)
