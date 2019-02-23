@@ -14,8 +14,6 @@ import (
 
 // Ping docs
 func (host Host) Ping(remote Host) {
-	var success int
-
 	sshConfig := &ssh.ClientConfig{
 		User: host.User,
 		Auth: []ssh.AuthMethod{
@@ -64,8 +62,8 @@ func (host Host) Ping(remote Host) {
 			fmt.Println("Err", output)
 			continue
 		}
-		success++
-		fmt.Printf("%s => %s, %f - %d/%d\n", host.Name, remote.Name, f, success, resultItem.Counter)
+		resultItem.Success++
+		fmt.Printf("%s => %s, %f - %d/%d\n", host.Name, remote.Name, f, resultItem.Success, resultItem.Counter)
 		resultItem.Result = f
 
 		time.Sleep(time.Second)

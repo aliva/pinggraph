@@ -11,6 +11,7 @@ type pingResult struct {
 	HostName   string
 	RemoteName string
 	Counter    int
+	Success    int
 	Result     float64
 }
 
@@ -24,7 +25,6 @@ var pingResultChan = make(chan pingResult)
 func webClientHandler() {
 	for {
 		result := <-pingResultChan
-		fmt.Println(result)
 
 		for i, client := range webClientSlice {
 			err := client.conn.WriteJSON(result)

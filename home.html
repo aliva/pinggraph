@@ -48,7 +48,7 @@
         "source": data.HostName,
         "target": data.RemoteName,
         // "type": "curvedArrow",
-        "label": data.Result + "ms",
+        "label": data.Result + "ms (" + data.Success + "/" +  data.Counter + ")",
       })
       s.refresh()
     }
@@ -98,7 +98,7 @@
       type: 'canvas'
     },
     settings: {
-      defaultEdgeLabelSize: 20,
+      defaultEdgeLabelSize: 15,
       edgeLabelSize: 'proportional'
     }
   });
