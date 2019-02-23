@@ -1,0 +1,8 @@
+- name: "node-01"
+  host: "1.2.3.4"
+  user: "ubuntu"
+- name: "node-02"
+  host: "1.2.3.5"
+- host: "1.2.3.6"
+- host: "8.8.8.8"
+  isremote: true
