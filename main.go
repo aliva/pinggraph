@@ -8,7 +8,12 @@ import (
 
 var hosts = make([]Host, 0)
 
-func pinger() {
+func main() {
+	fileFlag := flag.String("f", "hosts.yml", "hosts file")
+	flag.Parse()
+
+	hosts = LoadConfig(*fileFlag)
+
 	for _, h := range hosts {
 		for _, r := range hosts {
 			if h.Name != r.Name && h.IsRemote == false {
@@ -16,16 +21,9 @@ func pinger() {
 			}
 		}
 	}
-}
-
-func main() {
-	fileFlag := flag.String("f", "hosts.yml", "hosts file")
-	flag.Parse()
-
-	hosts = LoadConfig(*fileFlag)
-	pinger()
 
 	go webClientHandler()
+
 	http.HandleFunc("/", serveHome)
 	http.HandleFunc("/ws", serveWs)
 	err := http.ListenAndServe(":8000", nil)
