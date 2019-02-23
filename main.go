@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"log"
 	"net/http"
 )
@@ -18,7 +19,10 @@ func pinger() {
 }
 
 func main() {
-	hosts = LoadConfig("hosts.yml")
+	fileFlag := flag.String("f", "hosts.yml", "hosts file")
+	flag.Parse()
+
+	hosts = LoadConfig(*fileFlag)
 	pinger()
 
 	go webClientHandler()
