@@ -12,16 +12,23 @@ import (
 	"golang.org/x/crypto/ssh"
 )
 
-// Ping docs
-func (host Host) Ping(remote Host) {
+type node struct {
+	Name     string
+	Host     string
+	Port     int
+	User     string
+	IsRemote bool
+}
+
+func (n node) Ping(r node) {
 	sshConfig := &ssh.ClientConfig{
-		User: host.User,
+		User: n.User,
 		Auth: []ssh.AuthMethod{
 			getPrivateKey(),
 		},
 		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
 	}
-	client, err := ssh.Dial("tcp", fmt.Sprintf("%s:%d", host.Host, host.Port), sshConfig)
+	client, err := ssh.Dial("tcp", fmt.Sprintf("%s:%d", n.Host, n.Port), sshConfig)
 	if err != nil {
 		fmt.Println("client", err)
 		return
@@ -29,12 +36,12 @@ func (host Host) Ping(remote Host) {
 
 	cmd := fmt.Sprintf(
 		"ping -c 1 %s -W 1 | tail -1 | awk '{print $4}' | cut -d '/' -f 2",
-		remote.Host,
+		r.Host,
 	)
 
 	resultItem := pingResult{
-		HostName:   host.Name,
-		RemoteName: remote.Name,
+		HostName:   n.Name,
+		RemoteName: r.Name,
 		Counter:    0,
 		Result:     -1,
 	}
@@ -63,7 +70,7 @@ func (host Host) Ping(remote Host) {
 			continue
 		}
 		resultItem.Success++
-		fmt.Printf("%s => %s, %f - %d/%d\n", host.Name, remote.Name, f, resultItem.Success, resultItem.Counter)
+		fmt.Printf("%s => %s, %f - %d/%d\n", n.Name, r.Name, f, resultItem.Success, resultItem.Counter)
 		resultItem.Result = f
 
 		time.Sleep(time.Second)

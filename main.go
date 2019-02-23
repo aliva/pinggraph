@@ -7,18 +7,16 @@ import (
 	"net/http"
 )
 
-var hosts = make([]Host, 0)
-
 func main() {
-	fileFlag := flag.String("f", "hosts.yml", "hosts file")
+	fileFlag := flag.String("f", "nodes.yml", "hosts file")
 	flag.Parse()
 
-	hosts = LoadConfig(*fileFlag)
+	nodes := loadNodes(*fileFlag)
 
-	for _, h := range hosts {
-		for _, r := range hosts {
-			if h.Name != r.Name && h.IsRemote == false {
-				go h.Ping(r)
+	for _, n := range nodes {
+		for _, r := range nodes {
+			if n.Name != r.Name && n.IsRemote == false {
+				go n.Ping(r)
 			}
 		}
 	}

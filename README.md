@@ -9,15 +9,15 @@ Note that you can also add external nodes, (for example you want to ping `8.8.8.
 
 ```
 # Using pre-built file
-pinggraph -f hosts.yml
+pinggraph -f nodes.yml
 
 # From source
-go run *.go -f hosts.yml
+go run *.go -f nodes.yml
 ```
 
-### hosts.yml keys
+### nodes.yml keys
 
-(check `hosts.yml.example` for sample)
+(check `nodes.yml.example` for sample)
 
 | Key      | Default      | Description |
 | ---      | ------------ | ----------- |
