@@ -28,4 +28,4 @@ go run *.go -f nodes.yml
 
 ## Screenshot
 
-> TODO
+![screenshot](/screenshot.png)
