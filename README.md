@@ -8,15 +8,15 @@ Note that you can also add external nodes, (for example you want to ping `8.8.8.
 
 ## Usage
 
-Download latest release from [this](https://github.com/aliva/pinggraph/releases/latest) page
+Download latest release from [this](https://github.com/aliva/pinggraph/releases/latest) page:
+
 ```
 pinggraph -f nodes.yml
 ```
 
-Or run from source
-```
-# From source
-go run *.go -f nodes.yml
+Or run from source:
+
+```go run *.go -f nodes.yml
 ```
 
 ### nodes.yml keys
