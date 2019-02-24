@@ -1,3 +1,4 @@
 *.yml
 !.travis.yml
 /pinggraph
+/pinggraph_*

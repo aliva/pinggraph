@@ -1,5 +1,7 @@
 # Ping Graph
 
+[![Build Status](https://travis-ci.org/aliva/pinggraph.svg?branch=master)](https://travis-ci.org/aliva/pinggraph)
+
 Before starting make sure you can connect to all nodes with an ssh connection. `pinggraph` connects to each node with ssh and tries to ping other nodes.
 
 Note that you can also add external nodes, (for example you want to ping `8.8.8.8` from all nodes.) You just need to set `isremote: true` for that node.

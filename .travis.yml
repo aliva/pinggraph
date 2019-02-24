@@ -1,12 +1,15 @@
 language: go
+
 script:
-  - go build
+  - go get github.com/mitchellh/gox
+  - gox -os="linux darwin windows" -arch="amd64 386"
 
 deploy:
   provider: releases
   api_key:
     secure: DyMEiAGr4r4Q/hh5+7KoUfS4pfKP7J2fpOpsRnHqxtAYcqlHlTlqOZgpsnDZxu4PThK9biaf38rfYMz4E9JGrl+dr39sUXnk1Q1gllwvEQrjBdM4ydunvk762J0vp0+DDiMiyt37Pp49lkHVJyv/1LGdHpWAc0Yl8RyQj5u3WjUZDiG0zrq6di8718u01cD+WaZV4JvQ5ikbPWdJWl6TNm2CqMeXmA3jnAI0i6OyCE72/Y7aEGJa+Ew2qtgmzs/t9VD0TGsp+xGc2XbKOi9DYGfkY8K4FqHQe4MoaJa6WB18BVGrB8gR9mLhxfa2K6KK6IJDPCdvPAlfbqx62DacIRaoAY7srcvZbNUQB0UOSwyJL3GQ9iP+LAH7J4oXXHy7wt3nfBdOqsopSMCPmZl95uT3I8+/evwSjbS2GL1n/ct5FMZdD3pKg6APY8UwHBW0A411BgQuY6w5v9rXbMgG8C3fdNr2oaYdBIZYSXBR/6G6Cklfvz1kf+JeHidupwKwbzEXVw1EDUy8RNs51sffjqVl3GB9/CwLv8mBIEecNwd4aXXcApgDF64PFqgDhMvAx7TYuCbQJ5fMkQA8rvwVsrqtwNEDtN68A7xM9GHgHPc2TmK0vsipJZp/CxAvMUTx4FOmGtn9h0SBjqKvL2OUDkA7aVyTxR2JCoGzuUPndJs=
-  file: pinggraph
+  file_glob: true
+  file: pinggraph_*
   skip_cleanup: true
   on:
     repo: aliva/pinggraph
