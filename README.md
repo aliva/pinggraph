@@ -14,7 +14,7 @@ pinggraph -f nodes.yml
 ```
 
 Or run from source
-````
+```
 # From source
 go run *.go -f nodes.yml
 ```
