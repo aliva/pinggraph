@@ -24,6 +24,5 @@ func webSocketHandler() {
 				)
 			}
 		}
-		time.Sleep(time.Second)
 	}
 }
