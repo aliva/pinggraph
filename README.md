@@ -24,7 +24,7 @@ go run *.go -f nodes.yml
 | host     | **Required** | Public IP or domain of your node |
 | user     | `root`         | User used for ssh connection into node
 | name     | if empty uses host value | Name given to this node |
-| isremote | false        | pinggraph doesn't ssh connect into remote nodes, but other nodes will ping it, (when you want to check if all nodes can connect into an external server like `8.8.8.8`)
+| isremote | false        | pinggraph doesn't ssh into remote nodes, but other nodes will ping it, (when you want to check if all nodes can connect into an external server like `8.8.8.8`)
 
 ## Screenshot
 
