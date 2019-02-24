@@ -16,7 +16,8 @@ pinggraph -f nodes.yml
 
 Or run from source:
 
-```go run *.go -f nodes.yml
+```
+go run *.go -f nodes.yml
 ```
 
 ### nodes.yml keys
