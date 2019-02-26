@@ -1,5 +1,4 @@
 *.yml
 !.travis.yml
-/pinggraph
 /pinggraph_*
 /vendor
